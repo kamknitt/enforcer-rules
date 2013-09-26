@@ -98,7 +98,7 @@
                     <outputDirectory>${maven.repository.directory}</outputDirectory>
                     <branch>refs/heads/maven-repository</branch>
                     <includes><include>**/*</include></includes>
-                    <excludes><exclude>.nojekyll</exclude></excludes>
+                    <excludes><exclude>**/.nojekyll</exclude></excludes>
                     <repositoryName>enforcer-rules</repositoryName>
                     <repositoryOwner>kamknitt</repositoryOwner>
                 </configuration>
