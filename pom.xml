@@ -28,6 +28,8 @@
     </licenses>
     <properties>
         <maven.version>2.2.1</maven.version>
+        <github.global.server>github</github.global.server>
+        <maven.repository.directory>${project.build.directory}/maven-repository</maven.repository.directory>
     </properties>
     <dependencies>
         <dependency>
@@ -72,24 +74,41 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>com.github.github</groupId>
-                <artifactId>downloads-maven-plugin</artifactId>
-                <version>0.6</version>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.7</version>
                 <configuration>
-                    <description>Official ${project.name} build of the ${project.version} release</description>
-                    <override>true</override>
-                    <includeAttached>true</includeAttached>
-                    <server>github</server>
+                    <altDeploymentRepository>internal.repo::default::file://${maven.repository.directory}</altDeploymentRepository>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.7</version>
+                <configuration>
+                    <message>Maven artifacts for ${project.version}</message>
+                    <noJekyll>true</noJekyll>
+                    <outputDirectory>${maven.repository.directory}</outputDirectory>
+                    <branch>refs/heads/maven-repository</branch>
+                    <includes><include>**/*</include></includes>
+                    <repositoryName>enforcer-rules</repositoryName>
+                    <repositoryOwner>kamknitt</repositoryOwner>
                 </configuration>
                 <executions>
                     <execution>
                         <goals>
-                            <goal>upload</goal>
+                            <goal>site</goal>
                         </goals>
-                        <phase>install</phase>
+                        <phase>deploy</phase>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub ${project.artifactId} Repository</name>
+            <url>https://raw.github.com/kamknitt/${project.artifactId}/maven-repository</url>
+        </repository>
+    </distributionManagement>
 </project>
