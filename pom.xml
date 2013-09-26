@@ -7,6 +7,25 @@
     <version>0.1</version>
     <name>Custom Enforcer rules - enforcer-rules</name>
     <packaging>jar</packaging>
+    <url>https://github.com/kamknitt/enforcer-rules</url>
+    <developers>
+        <developer>
+            <id>kamknitt</id>
+            <name>Kamil Knitter</name>
+            <email>kamknitt [at] gmail.com</email>
+        </developer>
+    </developers>
+    <issueManagement>
+        <url>https://github.com/kamknitt/enforcer-rules/issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
     <properties>
         <maven.version>2.2.1</maven.version>
     </properties>
@@ -51,6 +70,25 @@
                     <source>1.7</source>
                     <target>1.7</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>downloads-maven-plugin</artifactId>
+                <version>0.6</version>
+                <configuration>
+                    <description>Official ${project.name} build of the ${project.version} release</description>
+                    <override>true</override>
+                    <includeAttached>true</includeAttached>
+                    <server>github</server>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>upload</goal>
+                        </goals>
+                        <phase>install</phase>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
