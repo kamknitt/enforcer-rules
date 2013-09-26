@@ -75,6 +75,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
@@ -97,6 +98,7 @@
                     <outputDirectory>${maven.repository.directory}</outputDirectory>
                     <branch>refs/heads/maven-repository</branch>
                     <includes><include>**/*</include></includes>
+                    <excludes><exclude>.nojekyll</exclude></excludes>
                     <repositoryName>enforcer-rules</repositoryName>
                     <repositoryOwner>kamknitt</repositoryOwner>
                 </configuration>
